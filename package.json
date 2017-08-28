@@ -10,7 +10,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm build && node ./dist/test/test.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,9 @@
     "url": "https://github.com/tomaskraus/simple-ts-scheduler/issues"
   },
   "homepage": "https://github.com/tomaskraus/simple-ts-scheduler#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/assert-plus": "^1.0.4",
+    "assert-plus": "^1.0.0",
+    "typescript": "^2.4.2"
+  }
 }
