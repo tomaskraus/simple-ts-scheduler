@@ -4,6 +4,9 @@
   "description": "a simple, in-memory scheduler for tasks, written in typescript",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
+  "engines": {
+    "node": ">=6.11"
+  },
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
