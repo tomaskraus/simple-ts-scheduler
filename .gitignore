@@ -1,6 +1,11 @@
 node_modules/
+
+# generated content
+dist/
+
 *.log
 out/
+
 jsdoc/
 .nyc_output/
 coverage/

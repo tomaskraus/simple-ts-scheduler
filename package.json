@@ -1,0 +1,29 @@
+{
+  "name": "simple-ts-scheduler",
+  "version": "0.0.1",
+  "description": "a simple, in-memory scheduler for tasks, written in typescript",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomaskraus/simple-ts-scheduler.git"
+  },
+  "keywords": [
+    "scheduler",
+    "setTimeout",
+    "task",
+    "typescript"
+  ],
+  "author": "Tomas Kraus <tomas.krausik@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomaskraus/simple-ts-scheduler/issues"
+  },
+  "homepage": "https://github.com/tomaskraus/simple-ts-scheduler#readme",
+  "devDependencies": {}
+}
