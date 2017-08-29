@@ -50,6 +50,7 @@ const sch3: s.SimpleScheduler = new s.SimpleScheduler(multiHandler, customErrorH
     .add(500, { value: 5 })
     .add(500, { value: 4 }, "./test/file2.txt")
     .add(600, { value: 3 }, "./test/file2.txt")
+    .add(700, { value: 1 }, "./test/file2.txt")
     .add(750, { value: 6 }, "./test/file2.txt")
     .add(1500, { value: 2 });
 
