@@ -27,7 +27,7 @@ const customErrorHandler: s.ErrorCallbackType = (error) => {
 
 const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, fileName: string) => {
     if (task.value === 3) {
-        fs.readFile(fileName, (err, data) => {
+        fs.readFile(fileName, (err: object, data: any) => {
             if (err) {
                 error(err);
                 return;
