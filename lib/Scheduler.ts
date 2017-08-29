@@ -2,9 +2,13 @@
 
 // type SchedulerTaskType = { timeWhenExec: number, task: (x: any) => any };
 
+export type ErrorHandlerType = (error: { message: string, name: string }) => void;
 
-export type SchedulerCallbackType = (task: object, ...params: any[]) => void;
+export type SchedulerCallbackType = (errorHandler: ErrorHandlerType, task: object, ...params: any[]) => void;
 
+const errHandler: ErrorHandlerType = (error) => {
+    console.log(`***Error***: ${error}`);
+};
 
 export class Scheduler {
     private callbackHandler: SchedulerCallbackType;
@@ -17,11 +21,7 @@ export class Scheduler {
 
         setTimeout(
             () => {
-                try {
-                    this.callbackHandler(task, ...params);
-                } catch (e) {
-                    console.log(`*** ERROR ***: ${e}`);
-                }
+                this.callbackHandler(errHandler, task, ...params);
             },
             whenToExecute
         );
