@@ -1,29 +1,54 @@
-// import * as assert from "assert";
 
-// type SchedulerTaskType = { timeWhenExec: number, task: (x: any) => any };
+/**
+ * a type of function which handles error objects
+ */
+export type ErrorCallbackType = (error: object) => void;
 
-export type ErrorHandlerType = (error: { message: string, name: string }) => void;
+/**
+ * function that is called on a planned task when that task starts
+ */
+export type SchedulerCallbackType = (errorCallback: ErrorCallbackType, task: object, ...params: any[]) => void;
 
-export type SchedulerCallbackType = (errorHandler: ErrorHandlerType, task: object, ...params: any[]) => void;
 
-const defaultErrorHandler: ErrorHandlerType = (error) => {
+const defaultErrorCallback: ErrorCallbackType = (error) => {
     console.log(`***Error***: ${error}`);
 };
 
+/**
+ * Schedules a tasks, provides one SchedulerCallback and one ErrorCallback for all tasks added
+ *
+ * @export
+ * @class Scheduler
+ */
 export class Scheduler {
-    private callbackHandler: SchedulerCallbackType;
-    private errorHandler: ErrorHandlerType;
+    private callback: SchedulerCallbackType;
+    private errorCallback: ErrorCallbackType;
 
-    constructor(callbackHandler: SchedulerCallbackType, errorHandler: ErrorHandlerType = defaultErrorHandler) {
-        this.callbackHandler = callbackHandler;
-        this.errorHandler = errorHandler;
+    /**
+     * Creates an instance of Scheduler.
+     * @param {SchedulerCallbackType} callback
+     * @param {ErrorHandlerType} [errorCallback=defaultErrorCallback]
+     * @memberof Scheduler
+     */
+    constructor(callback: SchedulerCallbackType, errorCallback: ErrorCallbackType = defaultErrorCallback) {
+        this.callback = callback;
+        this.errorCallback = errorCallback;
     }
 
+    /**
+     *
+     *
+     * @param {number} whenToExecute a number of milliseconds from now, when a task will be run
+     * @param {object} task a task
+     * @param {...any[]} params optional task parameters
+     * @returns {Scheduler}
+     * @memberof Scheduler
+     */
     public add(whenToExecute: number, task: object, ...params: any[]): Scheduler {
 
         setTimeout(
             () => {
-                this.callbackHandler(this.errorHandler, task, ...params);
+                this.callback(this.errorCallback, task, ...params);
             },
             whenToExecute
         );

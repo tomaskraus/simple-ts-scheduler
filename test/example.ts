@@ -19,7 +19,7 @@ sch2.add(5000, { greet: "hello3 " }, 1, 2, 3)
 
 
 
-const customErrorHandler: s.ErrorHandlerType = (error) => {
+const customErrorHandler: s.ErrorCallbackType = (error) => {
     console.log("EEERRRORR=" + error);
 };
 
@@ -28,6 +28,7 @@ const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, f
         fs.readFile(fileName, (err, data) => {
             if (err) {
                 error(err);
+                return;
             }
             console.log(`file content:
   ${data}`);
