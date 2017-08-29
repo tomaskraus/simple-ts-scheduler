@@ -67,4 +67,10 @@ sch3.add(500, { value: 4 }, "./test/file2.txt")
     .add(9000, { value: 1 }, "./test/file2.txt")
     .add(1500, { value: 2 });
 
+
+const sch4: s.SimpleScheduler = new s.SimpleScheduler(multiHandler)
+    .add(2000, { value: 1 })
+    .add(4000, { value: 3 }, "./test/file.txt")
+    .add(5000, { value: 5 });
+
 console.log("start");

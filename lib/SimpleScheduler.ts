@@ -1,3 +1,6 @@
+import * as debug from "debug";
+
+const debugError: debug.IDebugger = debug("SimpleScheduler:ERROR");
 
 /**
  * a type of function which handles error objects
@@ -11,7 +14,7 @@ export type SchedulerCallbackType = (errorCallback: ErrorCallbackType, task: obj
 
 
 const defaultErrorCallback: ErrorCallbackType = (error) => {
-    console.log(`***Error***: ${error}`);
+    debugError(error);
 };
 
 /**
