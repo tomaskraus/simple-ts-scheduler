@@ -1,1 +1,1 @@
-export * from "../lib/Scheduler";
+export * from "../lib/SimpleScheduler";
