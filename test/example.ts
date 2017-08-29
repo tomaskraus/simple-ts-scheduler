@@ -35,6 +35,8 @@ const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, f
         });
     } else if (task.value === 5) {
         error(new Error("no 5 no!"));
+    } else if (task.value === 6) {
+        throw new Error("unrecoverable 6!");
     }
 
     console.log(task.value);
@@ -46,6 +48,7 @@ const sch3: s.Scheduler = new s.Scheduler(multiHandler, customErrorHandler)
     .add(500, { value: 5 })
     .add(500, { value: 4 }, "./test/file2.txt")
     .add(600, { value: 3 }, "./test/file2.txt")
+    .add(750, { value: 6 }, "./test/file2.txt")
     .add(1500, { value: 2 });
 
 console.log("start");
