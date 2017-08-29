@@ -17,7 +17,11 @@ export class Scheduler {
 
         setTimeout(
             () => {
-                this.callbackHandler(task, ...params);
+                try {
+                    this.callbackHandler(task, ...params);
+                } catch (e) {
+                    console.log(`*** ERROR ***: ${e}`);
+                }
             },
             whenToExecute
         );
