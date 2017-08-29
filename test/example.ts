@@ -1,7 +1,9 @@
-import * as s from "./../lib/Scheduler";
+import * as s from "./../lib/SimpleScheduler";
 import * as fs from "fs";
 
-const sch: s.Scheduler = new s.Scheduler((error, task: { greet: string }, a: number, b: number) => (console.log(task.greet + a + " " + b)));
+const sch: s.SimpleScheduler = new s.SimpleScheduler(
+    (error, task: { greet: string }, a: number, b: number) => (console.log(task.greet + a + " " + b))
+);
 
 sch.add(2000, { greet: "hello1 " }, 1, 2)
     .add(3000, { greet: "hello2 " });
@@ -11,7 +13,7 @@ const t: s.SchedulerCallbackType = (error, task: { greet: string }, ...p) => {
     console.log(task.greet + res);
 };
 
-const sch2: s.Scheduler = new s.Scheduler(t);
+const sch2: s.SimpleScheduler = new s.SimpleScheduler(t);
 sch2.add(5000, { greet: "hello3 " }, 1, 2, 3)
     .add(6000, { greet: "hello4 " }, "a")
     .add(6000, { greet: "hello5 " }, 10)
@@ -42,7 +44,7 @@ const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, f
     console.log(task.value);
 };
 
-const sch3: s.Scheduler = new s.Scheduler(multiHandler, customErrorHandler)
+const sch3: s.SimpleScheduler = new s.SimpleScheduler(multiHandler, customErrorHandler)
     .add(100, { value: 1 })
     .add(400, { value: 3 }, "./test/file1.txt")
     .add(500, { value: 5 })

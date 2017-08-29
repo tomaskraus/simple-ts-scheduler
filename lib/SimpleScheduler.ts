@@ -20,7 +20,7 @@ const defaultErrorCallback: ErrorCallbackType = (error) => {
  * @export
  * @class Scheduler
  */
-export class Scheduler {
+export class SimpleScheduler {
     private callback: SchedulerCallbackType;
     private errorCallback: ErrorCallbackType;
 
@@ -41,10 +41,10 @@ export class Scheduler {
      * @param {number} whenToExecute a number of milliseconds from now, when a task will be run
      * @param {object} task a task
      * @param {...any[]} params optional task parameters
-     * @returns {Scheduler}
+     * @returns {SimpleScheduler}
      * @memberof Scheduler
      */
-    public add(whenToExecute: number, task: object, ...params: any[]): Scheduler {
+    public add(whenToExecute: number, task: object, ...params: any[]): SimpleScheduler {
 
         setTimeout(
             () => {
