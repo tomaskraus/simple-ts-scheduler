@@ -19,7 +19,9 @@ sch2.add(5000, { greet: "hello3 " }, 1, 2, 3)
 
 
 
-
+const customErrorHandler: s.ErrorHandlerType = (error) => {
+    console.log("EEERRRORR=" + error);
+};
 
 const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, fileName: string) => {
     if (task.value === 3) {
@@ -37,7 +39,7 @@ const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, f
     console.log(task.value);
 };
 
-const sch3: s.Scheduler = new s.Scheduler(multiHandler)
+const sch3: s.Scheduler = new s.Scheduler(multiHandler, customErrorHandler)
     .add(100, { value: 1 })
     .add(400, { value: 3 }, "./test/file1.txt")
     .add(500, { value: 5 })

@@ -6,22 +6,24 @@ export type ErrorHandlerType = (error: { message: string, name: string }) => voi
 
 export type SchedulerCallbackType = (errorHandler: ErrorHandlerType, task: object, ...params: any[]) => void;
 
-const errHandler: ErrorHandlerType = (error) => {
+const defaultErrorHandler: ErrorHandlerType = (error) => {
     console.log(`***Error***: ${error}`);
 };
 
 export class Scheduler {
     private callbackHandler: SchedulerCallbackType;
+    private errorHandler: ErrorHandlerType;
 
-    constructor(callbackHandler: SchedulerCallbackType) {
+    constructor(callbackHandler: SchedulerCallbackType, errorHandler: ErrorHandlerType = defaultErrorHandler) {
         this.callbackHandler = callbackHandler;
+        this.errorHandler = errorHandler;
     }
 
     public add(whenToExecute: number, task: object, ...params: any[]): Scheduler {
 
         setTimeout(
             () => {
-                this.callbackHandler(errHandler, task, ...params);
+                this.callbackHandler(this.errorHandler, task, ...params);
             },
             whenToExecute
         );
