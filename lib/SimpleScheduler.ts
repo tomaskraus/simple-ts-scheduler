@@ -23,6 +23,7 @@ const defaultErrorCallback: ErrorCallbackType = (error) => {
 export class SimpleScheduler {
     private callback: SchedulerCallbackType;
     private errorCallback: ErrorCallbackType;
+    private lastTimerAdded: NodeJS.Timer;
 
     /**
      * Creates an instance of Scheduler.
@@ -46,7 +47,7 @@ export class SimpleScheduler {
      */
     public add(whenToExecute: number, task: object, ...params: any[]): SimpleScheduler {
 
-        setTimeout(
+        this.lastTimerAdded = setTimeout(
             () => {
                 this.callback(this.errorCallback, task, ...params);
             },
@@ -55,4 +56,14 @@ export class SimpleScheduler {
         return this;
     }
 
+    /**
+     * Returns a Timer of the currently added Task.
+     * When you want to cancel that task, use the node's clearTimeout() with that Timer object
+     *
+     * @returns {NodeJS.Timer} a Timer of the currently added Task
+     * @memberof SimpleScheduler
+     */
+    public getlastTimerAdded(): NodeJS.Timer {
+        return this.lastTimerAdded;
+    }
 }

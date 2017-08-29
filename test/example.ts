@@ -5,8 +5,12 @@ const sch: s.SimpleScheduler = new s.SimpleScheduler(
     (error, task: { greet: string }, a: number, b: number) => (console.log(task.greet + a + " " + b))
 );
 
+console.log(`timer1=${sch.getlastTimerAdded()}`);
+
 sch.add(2000, { greet: "hello1 " }, 1, 2)
     .add(3000, { greet: "hello2 " });
+
+console.log(`timer2=${sch.getlastTimerAdded()}`);
 
 const t: s.SchedulerCallbackType = (error, task: { greet: string }, ...p) => {
     const res: number = p.reduce((prev: number, val: number) => { return prev * val; }, 0);
@@ -47,11 +51,20 @@ const multiHandler: s.SchedulerCallbackType = (error, task: { value: number }, f
 const sch3: s.SimpleScheduler = new s.SimpleScheduler(multiHandler, customErrorHandler)
     .add(100, { value: 1 })
     .add(400, { value: 3 }, "./test/file1.txt")
-    .add(500, { value: 5 })
-    .add(500, { value: 4 }, "./test/file2.txt")
+    .add(500, { value: 5 });
+
+const tt: NodeJS.Timer = sch3.add(10000, { value: 2 }, "loong task", 10000).getlastTimerAdded();
+
+setTimeout(() => {
+    clearTimeout(tt);
+    console.log("timeout cleared");
+}, 7000);
+
+sch3.add(500, { value: 4 }, "./test/file2.txt")
     .add(600, { value: 3 }, "./test/file2.txt")
     .add(700, { value: 1 }, "./test/file2.txt")
-    .add(750, { value: 6 }, "./test/file2.txt")
+    // .add(8000, { value: 6 }, "./test/file2.txt")
+    .add(9000, { value: 1 }, "./test/file2.txt")
     .add(1500, { value: 2 });
 
 console.log("start");
